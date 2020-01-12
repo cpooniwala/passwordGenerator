@@ -1,5 +1,5 @@
-// Assignment Code
 var generateBtn = document.querySelector("#generate");
+var copyBtn = document.querySelector("#copy");
 
 //Define the function to check the length 
 function lengthCheck(){
@@ -27,8 +27,6 @@ function lengthCheck(){
 
 //Define the function for special characters
 function characters(){
-//call length check
-//lengthCheck()
 
 //Special Characters
 var confirmSpecial = confirm("Would You Like Special Characters?");
@@ -57,6 +55,7 @@ else {
 }
 }
 
+//Function for UserOutput
 function userOutput(){
   var passwordLength = lengthCheck();
   console.log(passwordLength);
@@ -71,7 +70,6 @@ function userOutput(){
   console.log(includeSpecial, includeNumeric, includeLower, includeUpper);
 
   generatePassword(includeSpecial, includeNumeric, includeLower, includeUpper, passwordLength)
-
 }
 
 //Character Array
@@ -161,19 +159,9 @@ var specialCharacters = [
 
 var numericCharacters = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
 
-
 // Create Password Function
 function generatePassword(includeSpecial, includeNumeric, includeLower, includeUpper, passwordLength) {
   var pwd = [];
-
-  const typesCount = includeSpecial + includeNumeric + includeLower + includeUpper;
-  console.log(typesCount);
-
-  const typesArr = [{includeSpecial}, {includeNumeric}, {includeLower}, {includeUpper}].filter
-  (
-    item => Object.values(item)[0]
-  );
-  console.log(typesArr);
 
   // If Statements
 
@@ -205,26 +193,29 @@ function generatePassword(includeSpecial, includeNumeric, includeLower, includeU
   var finalPassword = finalPassword.join("");
   //Invoke Write Password
   writePassword(finalPassword)
-  
 }
+
 
 // Write password to the #password input
 function writePassword(finalPassword) {
-  //Invoke Generate Passsword
   var passwordText = document.querySelector("#password");
-
   passwordText.value = finalPassword;
-
-  //copyBtn.removeAttribute("disabled");
-  //copyBtn.focus();
 }
-function copyToClipboard() {
-  // BONUS 
+
+//Write Function to Copy Password
+function copyToClipboard() {  
+  var text = document.getElementById('#password');
+  var range = document.createRange();
+
+  range.selectNode('#password');
+  window.getSelection().addRange(range);
+  document.execCommand('copy');
 }
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", userOutput);
 
-// BONUS EVENT LISTENER
+// Copy Event Listener
+copyBtn.addEventListener("click",copyToClipboard);
 
 
