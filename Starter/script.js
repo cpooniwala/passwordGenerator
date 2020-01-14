@@ -217,5 +217,3 @@ generateBtn.addEventListener("click", userOutput);
 
 // Copy Event Listener
 copyBtn.addEventListener("click",copyToClipboard);
-
-
